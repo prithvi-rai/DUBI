@@ -1,0 +1,113 @@
+WindowManager:
+    Home:
+    Cc:
+
+<Label>:
+    font_size: 20
+    size_hint: 0.7, 0.2
+
+<Home>:
+    name: "home"
+
+    FloatLayout:
+        cols: 1
+
+        FloatLayout:
+            cols: 2
+
+            Label:
+                text: "D U B I"
+                color: 0, 0, 0, 1
+                font_size: 60
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
+        Button:
+            size_hint: 0.690, 0.255
+            background_normal: 'newcapsulebutton.JPG'
+            background_down: 'image.JPG'
+            pos_hint: {'x': 0.1675, 'top': 0.8}
+            on_release:
+                root.file_chooser()
+                app.root.current = "cc"
+                root.manager.transition.direction = "left"
+
+        Label:
+            text: 'Active Capsules'
+            color: 0, 0, 0, 1
+            pos_hint: {'x': 0, 'top': 0.6}
+
+        BoxLayout:
+            orientation: 'horizontal'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            size_hint: 0.9, 0.4
+            id: labels_layout  # Add an id to the layout
+
+
+<Cc>:
+    name: "cc"
+    capsulenameone: capsulenameone
+
+    FloatLayout:
+        cols: 1
+
+        FloatLayout:
+            cols: 2
+
+            TextInput:
+                id: capsulenameone
+                text: ""
+                size_hint: 0.9, 0.1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+                multiline: False
+
+            Label:
+                color: 0, 0, 0, 1
+                font_size: 17
+                pos_hint: {'center_x': 0.5, 'center_y': 0.525}
+                text: 'Capsule Name:'
+
+            Label:
+                font_size: 17
+                color: 0, 0, 0, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.375}
+                text: 'Unlock Date:'
+
+            Button:
+                id: proceed_button
+                text: 'submit'
+                size_hint: 0.5, 0.1
+                pos_hint: {'center_x': 0.75, 'center_y': 0.05}
+                on_press: root.on_press_submit()
+
+            Label:
+                size_hint: 0.6, 0.3
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+                font_size: 30
+                id: selected_path
+                color: 0, 0, 0, 1
+                text: ""
+
+            Button:
+                id: unlockdate
+                text: "MM/DD/YYYY"
+                size_hint: 0.9, 0.1
+                color: 0, 0, 0, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                on_release: root.sdp_date()
+
+            Button:
+                id: unlocktime
+                text: "HH:MM AM/PM"
+                size_hint: 0.9, 0.1
+                color: 0, 0, 0, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                on_release: root.sdp_time()
+
+        Button:
+            text: 'go back'
+            size_hint: 0.5, 0.1
+            pos_hint: {'center_x': 0.25, 'center_y': 0.05}
+            on_press:
+                root.reset()
+                app.root.current = "home"
+                root.manager.transition.direction = "right"
